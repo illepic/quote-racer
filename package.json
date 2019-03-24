@@ -9,12 +9,21 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.123",
+    "@types/uuid": "^3.4.4",
+    "lodash": "^4.17.11",
     "register-service-worker": "^1.6.2",
+    "socket.io-client": "^2.2.0",
+    "tailwindcss": "^0.7.4",
+    "uuid": "^3.3.2",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue-socket.io-extended": "^3.2.1",
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.2",
+    "vuex-class-component": "^1.5.2"
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
