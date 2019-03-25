@@ -1,5 +1,5 @@
 <template>
-  <div v-html="identicon"></div>
+  <div v-html="identicon" class="avatar"></div>
 </template>
 <script lang="ts">
 import Vue from 'vue';

@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions, MutationTree, ActionTree, GetterTree } from 'vuex';
 import uuid from 'uuid/v1';
+import stringSimilarity from 'string-similarity';
 
 import { saveLocalStoragePlayer, readLocalStoragePlayer } from '@/utils';
-import { IPlayer, IRootState } from '@/types';
+import { IPlayer, ICompetitor, IRootState } from '@/types';
 
 Vue.use(Vuex);
 
@@ -16,7 +17,7 @@ export const appState: IRootState = {
       id: 'test-competitor-1',
       name: 'Test Competitor 1',
       is: false,
-      typed: 'Dude typed some stuff.',
+      typed: 'This is a long quote',
     },
     'test-competitor-2': {
       id: 'test-competitor-2',
@@ -79,8 +80,17 @@ export const getters: GetterTree<IRootState, any> = {
   playerTyped(state, { player }) {
     return player && player.typed;
   },
-  competitors(state) {
-    return state.players;
+  similarity(state) {
+    return (typed: string) =>
+      stringSimilarity.compareTwoStrings(typed, state.quote);
+  },
+  competitors(state, { similarity }): ICompetitor[] {
+    return Object.values(state.players)
+      .map(player => ({
+        ...player,
+        similarity: similarity(player.typed),
+      }))
+      .sort((a, b) => b.similarity - a.similarity);
   },
 };
 

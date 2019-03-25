@@ -1,8 +1,9 @@
 <template>
-  <div class="competitor p-6 bg-purple-light">
+  <div class="competitor flex flex-col p-6 text-purple-darkest">
     <Avatar :seed="player.id" />
     <h2 class="competitor__name">{{ player.name }}</h2>
     <div class="competitor__typed text-3xl">{{ player.typed }}</div>
+    <p>Similarity: {{ player.similarity }}</p>
   </div>
 </template>
 
@@ -10,10 +11,11 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+// import { Action, Getter, State, Mutation } from 'vuex-class';
 
 import Avatar from '@/components/Avatar.vue';
 
-import { IPlayer } from '@/types';
+import { ICompetitor } from '@/types';
 
 @Component({
   components: {
@@ -21,6 +23,6 @@ import { IPlayer } from '@/types';
   },
 })
 export default class Competitor extends Vue {
-  @Prop() public player!: IPlayer;
+  @Prop() public player!: ICompetitor;
 }
 </script>

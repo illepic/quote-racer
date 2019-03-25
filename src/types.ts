@@ -6,6 +6,9 @@ export interface IPlayer {
   typed: string;
   is: boolean;
 }
+export interface ICompetitor extends IPlayer {
+  similarity: number;
+}
 
 export interface IStatePlayer {
   [id: string]: IPlayer;

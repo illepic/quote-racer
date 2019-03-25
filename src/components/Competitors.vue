@@ -1,6 +1,5 @@
 <template>
   <div class="competitors w-full">
-    <h1>Competitors here</h1>
     <Competitor
       v-for="competitor in competitors"
       :key="competitor.id"
