@@ -7,7 +7,7 @@
       <Quote />
     </div>
     <div
-      class="right flex flex-col items-center justify-center w-2/3 h-screen bg-purple-dark p-6"
+      class="right flex flex-col items-center justify-center w-2/3 h-screen bg-purple-dark"
     >
       <Player />
     </div>

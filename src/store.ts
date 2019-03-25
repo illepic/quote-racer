@@ -20,7 +20,8 @@ export const mutations: MutationTree<IRootState> = {
   },
   PLAYER_ADD(state, player: IPlayer) {
     state.id = player.id;
-    state.players[state.id] = player;
+    // We are ADDING a new property to state.players: id. MUST be Vue.set()'d
+    Vue.set(state.players, player.id, player);
   },
   PLAYER_NAME(state, name: string) {
     state.players[state.id].name = name;
@@ -32,25 +33,28 @@ export const mutations: MutationTree<IRootState> = {
 
 export const actions: ActionTree<IRootState, any> = {
   playerAdd({ commit, state }, player?: IPlayer): any {
-    // @ TODO: cleanup
+    const retrievedPlayer = readLocalStoragePlayer(state.room);
+
+    // 1. Brand new player, no localstorage
+    if (!player && !retrievedPlayer) {
+      commit('PLAYER_ADD', {
+        name: '',
+        id: uuid(), // Generate unique ID for brand new player
+        typed: '',
+        is: true,
+      });
+    }
+
+    // 2. Returning player from localstorage
+    if (!player && retrievedPlayer) {
+      commit('PLAYER_ADD', retrievedPlayer);
+    }
+
+    // 3. Modifying name of existing player
     if (player) {
-      // Create player object to store locally, clean this up
-      const newPlayer = {
-        name: player && player.name ? player.name : '',
-        id: player && player.id ? player.id : uuid(), // Create or update
-        typed: '', // Haven't typed anything yet
-        is: true, // This player is us in browser
-      };
       // Store local
-      saveLocalStoragePlayer(state.room, newPlayer);
-      // Add directly for now
-      commit('PLAYER_ADD', newPlayer);
-    } else {
-      // Add saved player
-      const retrievedPlayer = readLocalStoragePlayer(state.room);
-      if (retrievedPlayer) {
-        commit('PLAYER_ADD', retrievedPlayer);
-      }
+      saveLocalStoragePlayer(state.room, player);
+      commit('PLAYER_ADD', player);
     }
   },
 };
