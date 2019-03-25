@@ -8,7 +8,7 @@
       <input v-model="name" name="player-name" id="player-name" type="text" />
     </form>
 
-    <form @submit.prevent="">
+    <form @submit.prevent="" autocomplete="off">
       <label for="player-typed" class="hidden">Player typed:</label>
       <input
         v-model="typed"
