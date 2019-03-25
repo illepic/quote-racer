@@ -1,13 +1,20 @@
+export type PlayerID = string;
+
 export interface IPlayer {
   name: string;
-  id: string;
+  id: PlayerID;
   typed: string;
+  is: boolean;
+}
+
+export interface IStatePlayer {
+  [id: string]: IPlayer;
 }
 
 // VueX
 export interface IRootState {
   room: string;
   quote: string;
-  player: IPlayer;
-  players: IPlayer[];
+  id: PlayerID;
+  players: IStatePlayer;
 }

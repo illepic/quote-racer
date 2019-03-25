@@ -1,25 +1,29 @@
 import Vue from 'vue';
-import Router from 'vue-router';
-import Home from './views/Home.vue';
+import VueRouter from 'vue-router';
+import { uniqueNamesGenerator } from 'unique-names-generator';
 
-Vue.use(Router);
+import store from './store';
+import Board from '@/views/Board.vue';
 
-export default new Router({
+Vue.use(VueRouter);
+
+const Router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-    },
+    // Redirect landing to named route
+    { path: '/', name: 'landing', redirect: () => uniqueNamesGenerator('-') },
+    // Rooms get full Board component
+    { path: '/:room', name: 'room', component: Board },
   ],
 });
+
+Router.beforeEach((to, from, next) => {
+  // Set room VueX state for room
+  if (to.name === 'room') {
+    store.commit('ROOM_SET', to.params.room);
+  }
+  next();
+});
+
+export default Router;

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <h1 class="bg-red">{{ test }}</h1>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
 

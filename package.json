@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "fmt": "prettier --write '**/*.{js,ts,css,vue}'"
   },
   "dependencies": {
     "@types/lodash": "^4.14.123",
@@ -15,6 +16,7 @@
     "register-service-worker": "^1.6.2",
     "socket.io-client": "^2.2.0",
     "tailwindcss": "^0.7.4",
+    "unique-names-generator": "^2.0.1",
     "uuid": "^3.3.2",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
@@ -35,7 +37,9 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "lint-staged": "^8.1.0",
+    "prettier": "^1.16.4",
     "ts-jest": "^23.0.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.2.1",
     "vue-template-compiler": "^2.5.21"
   },

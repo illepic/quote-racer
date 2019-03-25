@@ -2,41 +2,42 @@ import Vue from 'vue';
 import Vuex, { StoreOptions, MutationTree, ActionTree, GetterTree } from 'vuex';
 import uuid from 'uuid/v1';
 
-import { saveLocalStoragePlayer} from '@/utils';
-import {IPlayer, IRootState} from '@/types';
+import { saveLocalStoragePlayer } from '@/utils';
+import { IPlayer, IRootState } from '@/types';
 
 Vue.use(Vuex);
 
-const appState: IRootState = {
+export const appState: IRootState = {
   room: '',
   quote: 'This is a long quote from a VueX store.',
-  player: {
-    name: '',
-    id: '',
-    typed: '',
-  },
-  players: [],
+  id: '',
+  players: {},
 };
 
-const mutations: MutationTree<IRootState> = {
+export const mutations: MutationTree<IRootState> = {
   ROOM_SET(state, room) {
     state.room = room;
   },
-  PLAYER_ADD(state, player) {
-    state.player = player;
+  PLAYER_ADD(state, player: IPlayer) {
+    state.id = player.id;
+    state.players[state.id] = player;
   },
-  PLAYER_NAME(state, name) {
-    state.player.name = name;
+  PLAYER_NAME(state, name: string) {
+    state.players[state.id].name = name;
+  },
+  PLAYER_TYPED(state, text: string) {
+    state.players[state.id].typed = text;
   },
 };
 
-const actions: ActionTree<IRootState, any> = {
+export const actions: ActionTree<IRootState, any> = {
   playerAdd({ commit, state }, { name, id }: IPlayer): any {
     // Create player object to store locally
     const player = {
       name,
-      id: id ? id : uuid(),
-      typed: '',
+      id: id ? id : uuid(), // Create or update
+      typed: '', // Haven't typed anything yet
+      is: true, // This player is us in browser
     };
     // Store local
     saveLocalStoragePlayer(state.room, player);
@@ -45,9 +46,12 @@ const actions: ActionTree<IRootState, any> = {
   },
 };
 
-const getters: GetterTree<IRootState, any> = {
-  playerTyped(state) {
-    return state.player.typed;
+export const getters: GetterTree<IRootState, any> = {
+  player(state) {
+    return state.players[state.id];
+  },
+  playerTyped(state, { player }) {
+    return player && player.typed;
   },
 };
 

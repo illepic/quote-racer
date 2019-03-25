@@ -3,7 +3,7 @@
  */
 
 import { IPlayer } from '@/types';
-import { LOCAL_STORAGE} from '@/config';
+import { LOCAL_STORAGE } from '@/config';
 
 export interface IRoomLocal {
   [room: string]: IPlayer;
