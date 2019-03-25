@@ -1,5 +1,5 @@
 <template>
-  <div class="player w-full p-6 bg-purple-light">
+  <div class="player w-full p-6 mb-6 bg-purple-light">
     <Avatar :seed="player.id" />
     <h2>{{ player.name }}</h2>
 
@@ -9,14 +9,16 @@
     </form>
 
     <form @submit.prevent="" autocomplete="off">
-      <label for="player-typed" class="hidden">Player typed:</label>
-      <input
-        v-model="typed"
-        name="player-typed"
-        id="player-typed"
-        type="text"
-        class="border border-purple-dark text-4xl"
-      />
+      <div class="flex flex-col">
+        <label for="player-typed" class="hidden">Player typed:</label>
+        <input
+          v-model="typed"
+          name="player-typed"
+          id="player-typed"
+          type="text"
+          class="border border-purple-dark text-4xl"
+        />
+      </div>
     </form>
     <p>{{ playerTyped }}</p>
   </div>

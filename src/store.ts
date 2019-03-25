@@ -11,7 +11,20 @@ export const appState: IRootState = {
   room: '',
   quote: 'This is a long quote from a VueX store.',
   id: '',
-  players: {},
+  players: {
+    'test-competitor-1': {
+      id: 'test-competitor-1',
+      name: 'Test Competitor 1',
+      is: false,
+      typed: 'Dude typed some stuff.',
+    },
+    'test-competitor-2': {
+      id: 'test-competitor-2',
+      name: 'Test Competitor 2',
+      is: false,
+      typed: 'Dude also typed some stuff.',
+    },
+  },
 };
 
 export const mutations: MutationTree<IRootState> = {
@@ -65,6 +78,9 @@ export const getters: GetterTree<IRootState, any> = {
   },
   playerTyped(state, { player }) {
     return player && player.typed;
+  },
+  competitors(state) {
+    return state.players;
   },
 };
 
