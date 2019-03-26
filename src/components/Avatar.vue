@@ -10,9 +10,10 @@ import jdenticon from 'typestub-jdenticon';
 @Component
 export default class Avatar extends Vue {
   @Prop() public seed!: string;
+  @Prop({ default: 100 }) public size!: number;
 
   get identicon() {
-    return jdenticon.toSvg(this.seed, 100);
+    return jdenticon.toSvg(this.seed, this.size);
   }
 }
 </script>

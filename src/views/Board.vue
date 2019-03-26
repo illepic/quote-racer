@@ -7,10 +7,12 @@
       <Quote />
     </div>
     <div
-      class="right flex flex-col items-center justify-center w-2/3 h-screen bg-purple-dark"
+      class="right w-2/3 h-screen overflow-y-scroll bg-purple-dark flex flex-col items-center justify-center"
     >
-      <Player />
-      <Competitors />
+      <div class="flex flex-col items-center justify-center w-full">
+        <Player />
+        <Competitors />
+      </div>
     </div>
   </div>
 </template>
