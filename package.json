@@ -2,6 +2,7 @@
   "name": "vue-ts",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -15,7 +16,9 @@
     "@types/uuid": "^3.4.4",
     "jdenticon": "^2.1.1",
     "lodash": "^4.17.11",
+    "monk": "^6.0.6",
     "register-service-worker": "^1.6.2",
+    "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "string-similarity": "^3.0.0",
     "tailwindcss": "^0.7.4",

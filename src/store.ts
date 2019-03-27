@@ -49,6 +49,9 @@ export const actions: ActionTree<IRootState, any> = {
   playerAdd({ commit, state }, player?: IPlayer): any {
     const retrievedPlayer = readLocalStoragePlayer(state.room);
 
+    // TESTING
+    // this._vm.$socket.emit('ROOM_JOIN', { room: 'room-name-flerp'});
+
     // 1. Brand new player, no localstorage
     if (!player && !retrievedPlayer) {
       commit('PLAYER_ADD', {
@@ -57,6 +60,7 @@ export const actions: ActionTree<IRootState, any> = {
         typed: '',
         is: true,
       });
+
     }
 
     // 2. Returning player from localstorage
@@ -71,6 +75,7 @@ export const actions: ActionTree<IRootState, any> = {
       commit('PLAYER_ADD', player);
     }
   },
+
 };
 
 export const getters: GetterTree<IRootState, any> = {
